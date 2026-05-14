@@ -8,5 +8,4 @@ logs
 .env.*
 !.env.example
 README.md
-docs
 
