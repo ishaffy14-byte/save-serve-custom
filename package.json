@@ -8,15 +8,20 @@
     "backend:build": "npm run api:build && npm run worker:build",
     "api:build": "npm --prefix apps/api run build",
     "api:start": "npm --prefix apps/api run start",
+    "db:migrate": "node scripts/db-migrate.mjs",
+    "db:seed": "node scripts/db-seed-demo.mjs",
     "worker:build": "npm --prefix apps/worker run build",
     "worker:start": "npm --prefix apps/worker run start"
   },
   "devDependencies": {
     "@types/node": "^22.13.5",
+    "@types/pg": "^8.20.0",
     "typescript": "^5.8.2"
   },
   "engines": {
     "node": ">=22"
+  },
+  "dependencies": {
+    "pg": "^8.20.0"
   }
 }
-

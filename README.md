@@ -35,7 +35,13 @@ docker compose up -d postgres redis
 Apply the initial schema:
 
 ```bash
-psql "postgres://save_serve:save_serve@localhost:5432/save_serve" -f infra/db/migrations/001_initial_core.sql
+npm run db:migrate
+```
+
+Seed demo marketplace data:
+
+```bash
+npm run db:seed
 ```
 
 Run the API:
@@ -49,6 +55,9 @@ Then open:
 ```text
 http://localhost:4000/health
 http://localhost:4000/openapi.json
+http://localhost:4000/api/v1/shops
+http://localhost:4000/api/v1/listings
+http://localhost:4000/api/v1/listings/nearby?lat=52.5018&lng=13.4145
 ```
 
 ## Base44 Boundary
@@ -62,4 +71,3 @@ Do not copy Base44 runtime code into this repository as production code:
 - direct `base44.entities.*` UI access
 
 The old app can be used as a behavior reference while modules are rebuilt behind custom APIs.
-

@@ -22,7 +22,90 @@ export const openApiDocument = {
           }
         }
       }
+    },
+    "/shops": {
+      get: {
+        summary: "List active shops",
+        operationId: "listShops",
+        parameters: [
+          {
+            name: "limit",
+            in: "query",
+            required: false,
+            schema: { type: "integer", minimum: 1, maximum: 100, default: 50 }
+          },
+          {
+            name: "offset",
+            in: "query",
+            required: false,
+            schema: { type: "integer", minimum: 0, default: 0 }
+          }
+        ],
+        responses: {
+          "200": {
+            description: "Active shops"
+          }
+        }
+      }
+    },
+    "/listings": {
+      get: {
+        summary: "List active listings",
+        operationId: "listListings",
+        parameters: [
+          {
+            name: "limit",
+            in: "query",
+            required: false,
+            schema: { type: "integer", minimum: 1, maximum: 100, default: 50 }
+          },
+          {
+            name: "offset",
+            in: "query",
+            required: false,
+            schema: { type: "integer", minimum: 0, default: 0 }
+          }
+        ],
+        responses: {
+          "200": {
+            description: "Active listings"
+          }
+        }
+      }
+    },
+    "/listings/nearby": {
+      get: {
+        summary: "List nearby active listings",
+        operationId: "listNearbyListings",
+        parameters: [
+          {
+            name: "lat",
+            in: "query",
+            required: true,
+            schema: { type: "number", minimum: -90, maximum: 90 }
+          },
+          {
+            name: "lng",
+            in: "query",
+            required: true,
+            schema: { type: "number", minimum: -180, maximum: 180 }
+          },
+          {
+            name: "radius_meters",
+            in: "query",
+            required: false,
+            schema: { type: "number", minimum: 1, maximum: 50000, default: 5000 }
+          }
+        ],
+        responses: {
+          "200": {
+            description: "Nearby active listings"
+          },
+          "400": {
+            description: "Invalid nearby query"
+          }
+        }
+      }
     }
   }
 } as const;
-

@@ -47,3 +47,26 @@ export const sendNotFound = (response: ServerResponse, requestId: string): void 
   );
 };
 
+export const sendError = (
+  response: ServerResponse,
+  statusCode: number,
+  code: string,
+  message: string,
+  requestId: string,
+  details?: Record<string, unknown>
+): void => {
+  sendJson(
+    response,
+    statusCode,
+    {
+      error: {
+        code,
+        message,
+        request_id: requestId,
+        ...(details ? { details } : {})
+      }
+    },
+    requestId
+  );
+};
+
