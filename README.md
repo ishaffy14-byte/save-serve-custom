@@ -64,6 +64,17 @@ http://localhost:4000/api/v1/listings/nearby?lat=52.5018&lng=13.4145
 
 GitHub Actions runs backend build, database migration, demo seed, and marketplace integration smoke tests against Postgres/PostGIS and Redis on pull requests and pushes to `main`.
 
+## Docker
+
+Build production container images:
+
+```bash
+docker build -f apps/api/Dockerfile -t save-serve-api .
+docker build -f apps/worker/Dockerfile -t save-serve-worker .
+```
+
+Deployment notes are in [docs/deployment.md](./docs/deployment.md).
+
 ## Base44 Boundary
 
 Do not copy Base44 runtime code into this repository as production code:

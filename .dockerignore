@@ -1,0 +1,12 @@
+.git
+.github
+node_modules
+apps/*/dist
+logs
+*.log
+.env
+.env.*
+!.env.example
+README.md
+docs
+
