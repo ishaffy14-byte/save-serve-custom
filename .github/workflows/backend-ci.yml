@@ -88,3 +88,6 @@ jobs:
       - name: Build worker image
         run: docker build -f apps/worker/Dockerfile -t save-serve-worker:ci .
 
+      - name: Build web image
+        run: docker build -f apps/web/Dockerfile -t save-serve-web:ci .
+

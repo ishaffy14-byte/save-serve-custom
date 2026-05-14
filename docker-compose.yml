@@ -29,7 +29,86 @@ services:
       timeout: 5s
       retries: 5
 
+  migrate:
+    image: node:22-alpine
+    container_name: save-serve-migrate
+    working_dir: /app
+    environment:
+      DATABASE_URL: postgres://save_serve:save_serve@postgres:5432/save_serve
+    volumes:
+      - .:/app
+    command: sh -c "npm ci && npm run db:migrate"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  seed:
+    image: node:22-alpine
+    container_name: save-serve-seed
+    working_dir: /app
+    environment:
+      DATABASE_URL: postgres://save_serve:save_serve@postgres:5432/save_serve
+    volumes:
+      - .:/app
+    command: sh -c "npm ci && npm run db:seed"
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api/Dockerfile
+    container_name: save-serve-api
+    environment:
+      NODE_ENV: development
+      API_HOST: 0.0.0.0
+      API_PORT: 4000
+      DATABASE_URL: postgres://save_serve:save_serve@postgres:5432/save_serve
+      REDIS_URL: redis://redis:6379
+      CORS_ORIGIN: http://localhost:5173
+      LOG_LEVEL: info
+    ports:
+      - "4000:4000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  worker:
+    build:
+      context: .
+      dockerfile: apps/worker/Dockerfile
+    container_name: save-serve-worker
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://save_serve:save_serve@postgres:5432/save_serve
+      REDIS_URL: redis://redis:6379
+      WORKER_POLL_INTERVAL_MS: 5000
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        VITE_API_BASE_URL: http://localhost:4000
+    container_name: save-serve-web
+    ports:
+      - "5173:80"
+    depends_on:
+      api:
+        condition: service_started
+
 volumes:
   save_serve_postgres:
   save_serve_redis:
-

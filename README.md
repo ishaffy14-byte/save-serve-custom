@@ -39,6 +39,14 @@ Start local infrastructure:
 docker compose up -d postgres redis
 ```
 
+Run the full local preview stack:
+
+```bash
+docker compose up --build postgres redis migrate seed api worker web
+```
+
+Then open `http://localhost:5173`.
+
 Apply pending database migrations:
 
 ```bash
@@ -87,6 +95,8 @@ docker build -f apps/worker/Dockerfile -t save-serve-worker .
 ```
 
 Deployment notes are in [docs/deployment.md](./docs/deployment.md).
+
+Verification notes are in [docs/verification.md](./docs/verification.md).
 
 ## Base44 Boundary
 
