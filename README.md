@@ -8,6 +8,7 @@ The existing Base44-backed app remains the product/reference implementation. Thi
 
 - `apps/api`: TypeScript API scaffold with health and OpenAPI endpoints.
 - `apps/worker`: TypeScript worker scaffold for future background jobs.
+- `apps/web`: Vite/React marketplace preview backed by the custom API.
 - `infra`: local infrastructure notes and initial PostgreSQL/PostGIS schema.
 - `docs`: discovery and migration planning documents.
 - `docker-compose.yml`: local Postgres/PostGIS and Redis services.
@@ -24,6 +25,12 @@ Build backend targets:
 
 ```bash
 npm run backend:build
+```
+
+Build the web app:
+
+```bash
+npm run web:build
 ```
 
 Start local infrastructure:
@@ -48,6 +55,12 @@ Run the API:
 
 ```bash
 npm run api:start
+```
+
+Run the web app:
+
+```bash
+npm run web:dev
 ```
 
 Then open:

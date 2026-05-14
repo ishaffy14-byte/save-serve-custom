@@ -62,6 +62,9 @@ jobs:
       - name: Build backend
         run: npm run backend:build
 
+      - name: Build web
+        run: npm run web:build
+
       - name: Apply database migration
         run: npm run db:migrate
 

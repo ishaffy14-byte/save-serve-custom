@@ -11,6 +11,8 @@
     "db:migrate": "node scripts/db-migrate.mjs",
     "db:seed": "node scripts/db-seed-demo.mjs",
     "test:integration": "node tests/integration/marketplace-smoke.mjs",
+    "web:build": "npm --prefix apps/web run build",
+    "web:dev": "npm --prefix apps/web run dev",
     "worker:build": "npm --prefix apps/worker run build",
     "worker:start": "npm --prefix apps/worker run start"
   },
@@ -23,6 +25,10 @@
     "node": ">=22"
   },
   "dependencies": {
-    "pg": "^8.20.0"
+    "@vitejs/plugin-react": "^4.3.4",
+    "pg": "^8.20.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^6.1.0"
   }
 }
