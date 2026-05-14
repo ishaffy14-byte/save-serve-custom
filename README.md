@@ -32,7 +32,7 @@ Start local infrastructure:
 docker compose up -d postgres redis
 ```
 
-Apply the initial schema:
+Apply pending database migrations:
 
 ```bash
 npm run db:migrate
