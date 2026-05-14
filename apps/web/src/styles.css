@@ -1,0 +1,211 @@
+:root {
+  color: #17231d;
+  background: #f4efdf;
+  font-family: "Fraunces", Georgia, "Times New Roman", serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 12% 12%, rgba(239, 125, 49, 0.28), transparent 30rem),
+    radial-gradient(circle at 85% 5%, rgba(72, 125, 79, 0.24), transparent 28rem),
+    linear-gradient(135deg, #f8f2df 0%, #e4ecd4 100%);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+main {
+  width: min(1160px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 48px 0;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap: 32px;
+  align-items: stretch;
+  min-height: 360px;
+}
+
+.hero > div:first-child,
+.status-card,
+.notice,
+.listing-card,
+.shop-card {
+  border: 1px solid rgba(23, 35, 29, 0.12);
+  box-shadow: 0 24px 80px rgba(23, 35, 29, 0.12);
+}
+
+.hero > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  padding: clamp(32px, 6vw, 72px);
+  border-radius: 38px;
+  background: rgba(255, 252, 241, 0.76);
+}
+
+.hero h1 {
+  max-width: 760px;
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.88;
+  letter-spacing: -0.08em;
+}
+
+.hero p:not(.eyebrow) {
+  max-width: 680px;
+  margin: 28px 0 0;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: rgba(23, 35, 29, 0.72);
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #d95d19;
+}
+
+.status-card {
+  display: flex;
+  min-height: 220px;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 28px;
+  border-radius: 34px;
+  background: #243b2e;
+  color: #fff7e7;
+}
+
+.status-card span {
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.status-card strong {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+
+.notice {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 28px;
+  background: #fff6e7;
+}
+
+.notice h2 {
+  margin: 0 0 8px;
+}
+
+.notice p {
+  margin: 4px 0;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+}
+
+.section-grid {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 28px;
+  margin-top: 48px;
+}
+
+.section-grid h2 {
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 4rem);
+  line-height: 0.95;
+  letter-spacing: -0.05em;
+}
+
+.cards {
+  display: grid;
+  gap: 18px;
+}
+
+.shop-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.listing-card,
+.shop-card {
+  display: grid;
+  gap: 20px;
+  padding: 24px;
+  border-radius: 28px;
+  background: rgba(255, 252, 241, 0.72);
+}
+
+.listing-card h3,
+.shop-card h3 {
+  margin: 0;
+  font-size: 1.55rem;
+}
+
+.listing-card p:not(.eyebrow),
+.shop-card p:not(.eyebrow) {
+  margin: 0;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+  color: rgba(23, 35, 29, 0.68);
+  line-height: 1.55;
+}
+
+.listing-meta,
+.shop-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  font-family: "Space Grotesk", "Trebuchet MS", sans-serif;
+}
+
+.listing-meta strong {
+  color: #1c6b43;
+  font-size: 1.25rem;
+}
+
+.distance {
+  color: #d95d19 !important;
+  font-weight: 800;
+}
+
+@media (max-width: 780px) {
+  main {
+    width: min(100% - 20px, 560px);
+    padding: 24px 0;
+  }
+
+  .hero,
+  .section-grid,
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero > div:first-child {
+    padding: 32px;
+  }
+
+  .status-card {
+    min-height: 150px;
+  }
+}
+
