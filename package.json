@@ -10,6 +10,7 @@
     "api:start": "npm --prefix apps/api run start",
     "db:migrate": "node scripts/db-migrate.mjs",
     "db:seed": "node scripts/db-seed-demo.mjs",
+    "test:integration": "node tests/integration/marketplace-smoke.mjs",
     "worker:build": "npm --prefix apps/worker run build",
     "worker:start": "npm --prefix apps/worker run start"
   },

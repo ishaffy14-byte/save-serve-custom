@@ -60,6 +60,10 @@ http://localhost:4000/api/v1/listings
 http://localhost:4000/api/v1/listings/nearby?lat=52.5018&lng=13.4145
 ```
 
+## CI
+
+GitHub Actions runs backend build, database migration, demo seed, and marketplace integration smoke tests against Postgres/PostGIS and Redis on pull requests and pushes to `main`.
+
 ## Base44 Boundary
 
 Do not copy Base44 runtime code into this repository as production code:
