@@ -1,0 +1,22 @@
+{
+  "name": "save-serve-custom",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Custom Save&Serve platform rebuild without Base44 runtime dependencies.",
+  "scripts": {
+    "backend:build": "npm run api:build && npm run worker:build",
+    "api:build": "npm --prefix apps/api run build",
+    "api:start": "npm --prefix apps/api run start",
+    "worker:build": "npm --prefix apps/worker run build",
+    "worker:start": "npm --prefix apps/worker run start"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
+

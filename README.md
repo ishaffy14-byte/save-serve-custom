@@ -1,0 +1,65 @@
+# Save&Serve Custom Platform
+
+Clean rebuild repository for Save&Serve without Base44 runtime dependencies.
+
+The existing Base44-backed app remains the product/reference implementation. This repository is where the custom backend, worker, infrastructure, and future migrated clients should live.
+
+## Current Contents
+
+- `apps/api`: TypeScript API scaffold with health and OpenAPI endpoints.
+- `apps/worker`: TypeScript worker scaffold for future background jobs.
+- `infra`: local infrastructure notes and initial PostgreSQL/PostGIS schema.
+- `docs`: discovery and migration planning documents.
+- `docker-compose.yml`: local Postgres/PostGIS and Redis services.
+
+## Local Setup
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Build backend targets:
+
+```bash
+npm run backend:build
+```
+
+Start local infrastructure:
+
+```bash
+docker compose up -d postgres redis
+```
+
+Apply the initial schema:
+
+```bash
+psql "postgres://save_serve:save_serve@localhost:5432/save_serve" -f infra/db/migrations/001_initial_core.sql
+```
+
+Run the API:
+
+```bash
+npm run api:start
+```
+
+Then open:
+
+```text
+http://localhost:4000/health
+http://localhost:4000/openapi.json
+```
+
+## Base44 Boundary
+
+Do not copy Base44 runtime code into this repository as production code:
+
+- `base44/`
+- `@base44/sdk`
+- `@base44/vite-plugin`
+- `src/api/base44Client.js`
+- direct `base44.entities.*` UI access
+
+The old app can be used as a behavior reference while modules are rebuilt behind custom APIs.
+

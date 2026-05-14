@@ -1,0 +1,11 @@
+{
+  "name": "@save-serve/api",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "build": "node ../../node_modules/typescript/bin/tsc -p tsconfig.json",
+    "start": "node dist/main.js"
+  }
+}
+
