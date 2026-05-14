@@ -1,0 +1,73 @@
+name: Backend CI
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  backend:
+    name: Build and integration smoke test
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_DB: save_serve
+          POSTGRES_USER: save_serve
+          POSTGRES_PASSWORD: save_serve
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U save_serve -d save_serve"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      NODE_ENV: test
+      API_HOST: 127.0.0.1
+      API_PORT: 4090
+      DATABASE_URL: postgres://save_serve:save_serve@127.0.0.1:5432/save_serve
+      REDIS_URL: redis://127.0.0.1:6379
+      CORS_ORIGIN: http://localhost:5173
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build backend
+        run: npm run backend:build
+
+      - name: Apply database migration
+        run: npm run db:migrate
+
+      - name: Seed demo marketplace data
+        run: npm run db:seed
+
+      - name: Run marketplace integration smoke test
+        run: npm run test:integration
+
